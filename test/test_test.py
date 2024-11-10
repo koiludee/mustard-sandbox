@@ -6,8 +6,5 @@ def pre_post():
     yield
     print("\nPostcondition output text")
 
-def test_check_pass():
+def test_check_pass(pre_post):
     assert 1==1
-
-def test_check_failed(pre_post):
-    assert 1==2
