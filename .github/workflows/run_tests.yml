@@ -23,7 +23,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: install dependencies
+      - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run tests
-        run: pytest -v
+        run: pytest --junitxml=results.xml
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: results.xml
+      - name: Kill chrome processes
+        run: pkill chrome || true
