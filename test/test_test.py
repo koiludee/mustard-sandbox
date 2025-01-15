@@ -1,13 +1,13 @@
 import pytest
 
 @pytest.fixture()
-def pre_post():
-    print("Precondition output text")
+def condition_output():
+    print("\nPrecondition text")
     yield
-    print("\nPostcondition output text")
+    print("\nPostcondition text")
 
-def test_check_pass():
+def test_check_pass(condition_output):
     assert 1==1
 
-def test_check_failed(pre_post):
+def test_check_failed(condition_output):
     assert 1==2
