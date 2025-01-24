@@ -18,10 +18,6 @@ class HomePage(BasePage):
     menu_phones_button = (By.CSS_SELECTOR, '''[onclick="byCat('phone')"]''')
     menu_laptops_button = (By.CSS_SELECTOR, '''[onclick="byCat('notebook')"]''')
 
-    #Previous/Next button
-    prev_button = (By.XPATH, '//*[@id="prev2"]')
-    next_button = (By.XPATH, '//*[@id="next2"]')
-
     #Carousel
     PAGINATOR_BUTTON_XPATH = '//*[@id="carouselExampleIndicators"]/ol/li[{}]'
 
@@ -31,11 +27,25 @@ class HomePage(BasePage):
     paginator_button_second = (By.XPATH, PAGINATOR_BUTTON_XPATH.format(2))
     paginator_button_third = (By.XPATH, PAGINATOR_BUTTON_XPATH.format(3))
 
+    #Grid
+    PRODUCT_CARD_BLOCK_XPATH = '//*[@id="tbodyid"]/div{}/div/div' # - get_product_card_locator
 
-    def click_galaxy_s6(self):
+    prev_button = (By.XPATH, '//*[@id="prev2"]')
+    next_button = (By.XPATH, '//*[@id="next2"]')
+
+    def home_open(self):
         HomePage.open(self, 'https://www.demoblaze.com/index.html')
-        HomePage.click(self, By.XPATH, '//*[@id="tbodyid"]/div[1]/div/div/h4/a')
 
-    def check_product_qty(self, qty):
-        product_qty = self.driver.find_elements(By.CSS_SELECTOR, '.card')
+    def home_button_click(self):
+        self.click(*self.home_button)
+
+    #def click_galaxy_s6(self):
+        #HomePage.open(self, 'https://www.demoblaze.com/index.html')
+        #HomePage.click(self, By.XPATH, '//*[@id="tbodyid"]/div[1]/div/div/h4/a')
+
+    def check_grid_product_qty(self, qty):
+        product_qty = self.driver.find_elements(By.CSS_SELECTOR, '.card-block')
         assert len(product_qty) == qty
+
+    def get_product_card_locator(self, index):
+        return By.XPATH, self.PRODUCT_CARD_BLOCK_XPATH.format(index)
