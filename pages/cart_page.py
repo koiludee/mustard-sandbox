@@ -10,7 +10,7 @@ class CartPage(BasePage):
 
     def open_cart(self):
         BasePage.home_open(self)
-        HomePage.cart_click(self)
+        HomePage.cart_click()
 
     def order_place_button_is_displayed(self):
         return BasePage.is_element_visible(self, *place_order_button)

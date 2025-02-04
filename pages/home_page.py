@@ -32,23 +32,22 @@ PRODUCT_CARD_BLOCK_XPATH = '//*[@id="tbodyid"]/div{}/div/div'  # - get_product_c
 prev_button = (By.XPATH, '//*[@id="prev2"]')
 next_button = (By.XPATH, '//*[@id="next2"]')
 
+
+def get_product_card_locator(index):
+    return By.XPATH, PRODUCT_CARD_BLOCK_XPATH.format(index)
+
+
 class HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
     def home_button_click(self):
-        self.click(*self.home_button)
+        self.click(self, *home_button)
 
     def cart_click(self):
         self.click(*navbar_cart_button)
-
-    #def click_galaxy_s6(self):
-        #HomePage.open(self, 'https://www.demoblaze.com/index.html')
-        #HomePage.click(self, By.XPATH, '//*[@id="tbodyid"]/div[1]/div/div/h4/a')
 
     def check_grid_product_qty(self, qty):
         product_qty = self.driver.find_elements(By.CSS_SELECTOR, '.card-block')
         assert len(product_qty) == qty
 
-    def get_product_card_locator(self, index):
-        return By.XPATH, self.PRODUCT_CARD_BLOCK_XPATH.format(index)

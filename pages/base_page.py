@@ -14,7 +14,7 @@ class BasePage:
     def home_open(self):
         BasePage.open(self, 'https://www.demoblaze.com/index.html')
 
-    def find_element_args(self, *args):
+    def find_element_args(self, args):
         return self.driver.find_element(*args)
 
     def find_element(self, by, locator):
